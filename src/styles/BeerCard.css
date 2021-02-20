@@ -1,14 +1,52 @@
 .card {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 180px;
   width: auto;
   margin: 5px;
   border: 1px solid #353f3f;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 img {
   zoom: 12%;
+}
+
+.image-container {
+  margin: auto 0;
+  margin-top: auto;
+  margin-left: auto;
+}
+
+.name-tagline {
+  text-align: center;
+}
+
+.beer-name {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.beer-tagline {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.info-container {
+  display: inline-block;
+  width: 300px;
+  height: 100%;
+  margin: auto;
+}
+
+.beer-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: auto;
+  height: 40%;
 }
 
 /* section {

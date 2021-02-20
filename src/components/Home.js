@@ -8,7 +8,7 @@ export const Home = () => {
 
   const fetchBeerData = () => {
     return axios
-      .get('https://api.punkapi.com/v2/beers')
+      .get('https://api.punkapi.com/v2/beers?per_page=9')
       .then(({ data }) => {
         // handle success
         console.log(data);

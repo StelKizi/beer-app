@@ -1,6 +1,6 @@
 .beer-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
-  margin-top: 50px;
+  margin: 50px 20px;
 }

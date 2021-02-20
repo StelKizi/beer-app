@@ -1,3 +1,4 @@
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Topbar } from './components/Topbar';
 /* import { BeerList } from './components/BeerList'; */
