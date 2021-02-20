@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  height: 180px;
+  width: auto;
+  margin: 5px;
+  border: 1px solid #353f3f;
+}
+
+img {
+  zoom: 12%;
+}
+
+/* section {
+  text-align: center;
+} */
