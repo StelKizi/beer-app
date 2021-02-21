@@ -1,0 +1,44 @@
+.beer-card-expanded {
+  background-color: #dad2c9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.top {
+  display: grid;
+  margin: 20px 0 0 40px;
+}
+
+.info {
+  float: right;
+  margin-left: 20px;
+}
+
+.info > .beer-name {
+  font-size: 22px;
+}
+
+.info > .beer-tagline {
+  text-align: center;
+}
+
+.top > .beer-description {
+  display: inline-block;
+  width: 70%;
+}
+
+.brewers-tips {
+  padding-bottom: 0;
+  margin-bottom: 5px;
+}
+
+.contributor {
+  font-size: 14px;
+  padding-top: 0;
+  margin-top: 0;
+  float: right;
+}
+
+.food-pairing {
+  font-size: 14px;
+  margin-bottom: 0;
+}

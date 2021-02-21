@@ -29,7 +29,7 @@ export const Home = () => {
   return (
     <div className='beer-container'>
       {beers.map(beer => (
-        <BeerCard key={beer.id} beer={beer} />
+        <BeerCard key={beer.name} beer={beer} />
       ))}
     </div>
   );

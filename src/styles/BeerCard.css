@@ -2,10 +2,22 @@
   display: flex;
   justify-content: space-evenly;
   height: 180px;
-  width: auto;
   margin: 5px;
   border: 1px solid #353f3f;
   font-family: Arial, Helvetica, sans-serif;
+  border-radius: 3px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.005);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.11);
+  transition: transform 0.2s ease-out;
+}
+
+.card:active {
+  transform: scale(1) translateZ(0);
+  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.11);
 }
 
 img {
@@ -47,6 +59,11 @@ img {
   overflow: hidden;
   margin: auto;
   height: 40%;
+}
+
+.favorite-icon {
+  padding: 10px 10px 0 0;
+  color: #f7af2b;
 }
 
 /* section {

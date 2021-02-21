@@ -10,12 +10,8 @@ function App() {
     <div>
       <Topbar />
       <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route>
-          <Favorites />
-        </Route>
+        <Route exact path='/' component={Home} />
+        <Route path='/favorites' component={Favorites} />
       </Switch>
       {/* <BeerList /> */}
     </div>
