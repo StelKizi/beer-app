@@ -1,44 +1,67 @@
 .beer-card-expanded {
+  display: flex;
+  flex-direction: column;
   background-color: #dad2c9;
   font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+}
+
+.close-expanded-card {
+  align-self: flex-end;
+  margin: 15px 15px 0 0;
+}
+
+.favorite {
+  display: inline;
+  width: 200px;
+}
+
+.close-expanded-card:hover {
+  /* font-size: xx-large; */
+  transform: scale(1.4, 1.4);
+  transition: 0.2s ease;
+}
+
+.close-expanded-card:active {
+  /* font-size: xx-large; */
+  transform: scale(1, 1);
+  transition: 0.1s ease-out;
 }
 
 .top {
-  display: grid;
   margin: 20px 0 0 40px;
 }
 
-.info {
-  float: right;
+.right-side {
+  padding-left: 40px;
+}
+
+.right-side > .beer-name {
+  margin-top: 20px;
+}
+
+.image-name-tagline {
+  display: flex;
   margin-left: 20px;
 }
 
-.info > .beer-name {
+.image-name-tagline > .beer-name {
   font-size: 22px;
 }
 
-.info > .beer-tagline {
+.image-name-tagline > .beer-tagline {
   text-align: center;
 }
 
-.top > .beer-description {
+.beer-card-expanded > .beer-description {
   display: inline-block;
-  width: 70%;
-}
-
-.brewers-tips {
-  padding-bottom: 0;
-  margin-bottom: 5px;
-}
-
-.contributor {
-  font-size: 14px;
-  padding-top: 0;
-  margin-top: 0;
-  float: right;
+  width: 90%;
+  margin: 15px auto;
 }
 
 .food-pairing {
   font-size: 14px;
-  margin-bottom: 0;
+  padding: 10px 0 10px;
+  width: 90%;
+  margin: auto;
 }

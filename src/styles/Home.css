@@ -6,8 +6,6 @@
   margin: 50px 20px;
 }
 
-/* @media (max-width: 700px) {
-  .beer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
+.is-not-expanded {
+  display: none;
+}
