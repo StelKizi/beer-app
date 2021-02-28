@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import CardActions from '@material-ui/core/CardActions';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import IconButton from '@material-ui/core/IconButton';
 
 import '../styles/BeerCardExpanded.css';
 
-export const BeerCardExpanded = ({ beer, closeModal }) => {
+export const BeerCardExpanded = ({ beer }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleIconClick = e => {
@@ -14,22 +15,17 @@ export const BeerCardExpanded = ({ beer, closeModal }) => {
   };
 
   return (
-    <div className='beer-card-expanded'>
-      <span className='favorite'>
-        Add to favorites{' '}
-        {!isFavorite ? (
-          <FavoriteBorderIcon
-            onClickCapture={e => handleIconClick(e)}
-            className='favorite-icon'
-          />
-        ) : (
-          <FavoriteIcon
-            onClickCapture={e => handleIconClick(e)}
-            className='favorite-icon'
-          />
-        )}
-      </span>
-      <CloseRoundedIcon className='close-expanded-card' onClick={closeModal} />
+    <div className='beer-card'>
+      <CardActions className='favorite-icon'>
+        <IconButton aria-label='add to favorites'>
+          {!isFavorite ? (
+            <FavoriteBorderIcon onClickCapture={e => handleIconClick(e)} />
+          ) : (
+            <FavoriteIcon onClickCapture={e => handleIconClick(e)} />
+          )}
+        </IconButton>
+      </CardActions>
+
       <section className='top'>
         <section className='image-name-tagline'>
           <img src={beer.image_url} alt={beer.name} />
@@ -40,8 +36,8 @@ export const BeerCardExpanded = ({ beer, closeModal }) => {
             </p>
           </section>
         </section>
+        <p className='beer-description'>{beer.description}</p>
       </section>
-      <p className='beer-description'>{beer.description}</p>
 
       <section>
         <p className='food-pairing'>

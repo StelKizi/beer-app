@@ -1,35 +1,20 @@
-.beer-card-expanded {
-  display: flex;
-  flex-direction: column;
-  background-color: #dad2c9;
+.beer-card {
+  background-color: #fcfaf7;
   font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #c2bdbd;
   border-radius: 5px;
+  margin: 3px;
+  height: auto;
 }
 
-.close-expanded-card {
-  align-self: flex-end;
-  margin: 15px 15px 0 0;
-}
-
-.favorite {
+.favorite-icon {
   display: inline;
-  width: 200px;
-}
-
-.close-expanded-card:hover {
-  /* font-size: xx-large; */
-  transform: scale(1.4, 1.4);
-  transition: 0.2s ease;
-}
-
-.close-expanded-card:active {
-  /* font-size: xx-large; */
-  transform: scale(1, 1);
-  transition: 0.1s ease-out;
+  float: right;
 }
 
 .top {
   margin: 20px 0 0 40px;
+  width: 80%;
 }
 
 .right-side {
@@ -37,7 +22,11 @@
 }
 
 .right-side > .beer-name {
-  margin-top: 20px;
+  margin-bottom: -12px;
+}
+
+.beer-name {
+  font-size: 22px;
 }
 
 .image-name-tagline {
@@ -45,23 +34,27 @@
   margin-left: 20px;
 }
 
+img {
+  zoom: 15%;
+}
 .image-name-tagline > .beer-name {
   font-size: 22px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
-.image-name-tagline > .beer-tagline {
+.beer-tagline {
   text-align: center;
 }
 
-.beer-card-expanded > .beer-description {
+.beer-description {
   display: inline-block;
-  width: 90%;
   margin: 15px auto;
 }
 
 .food-pairing {
   font-size: 14px;
-  padding: 10px 0 10px;
+  padding: 0 0 10px;
   width: 90%;
   margin: auto;
 }
