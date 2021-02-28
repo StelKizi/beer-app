@@ -5,7 +5,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import '../styles/BeerCardExpanded.css';
 
-export const BeerCardExpanded = ({ beer, closeCard }) => {
+export const BeerCardExpanded = ({ beer, closeModal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleIconClick = e => {
@@ -29,7 +29,7 @@ export const BeerCardExpanded = ({ beer, closeCard }) => {
           />
         )}
       </span>
-      <CloseRoundedIcon className='close-expanded-card' onClick={closeCard} />
+      <CloseRoundedIcon className='close-expanded-card' onClick={closeModal} />
       <section className='top'>
         <section className='image-name-tagline'>
           <img src={beer.image_url} alt={beer.name} />

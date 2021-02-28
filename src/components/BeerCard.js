@@ -3,7 +3,7 @@ import '../styles/BeerCard.css';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-export const BeerCard = ({ beer }) => {
+export const BeerCard = ({ beer, openModal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleIconClick = e => {
@@ -12,7 +12,7 @@ export const BeerCard = ({ beer }) => {
   };
 
   return (
-    <div className='card'>
+    <div className='card' onClick={openModal}>
       <div className='image-container'>
         <img src={beer.image_url} alt={beer.name} />
       </div>

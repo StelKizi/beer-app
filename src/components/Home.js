@@ -1,15 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BeerCard } from './BeerCard';
+import Modal from 'react-modal';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import '../styles/Home.css';
+import '../styles/BeerCardExpanded.css';
+
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+Modal.setAppElement('#root');
 
 /* import CloseRoundedIcon from '@material-ui/icons/CloseRounded'; */
-import '../styles/BeerCardExpanded.css';
 
 export const Home = () => {
   const [beers, setBeers] = useState([]);
-  const expandedCardRef = useRef(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  /* const expandedCardRef = useRef(null); */
 
   const fetchBeerData = () => {
     return axios
@@ -31,13 +41,18 @@ export const Home = () => {
     });
   }, []);
 
-  const handleExpandCard = () => {
-    expandedCardRef.current.classList.add('is-expanded');
+  const openModal = () => {
+    setIsOpen(true);
   };
 
-  /* const handleCloseExpandedCard = () => {
-    expandedCardRef.current.classList.add('is-not-expanded');
-  }; */
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleIconClick = e => {
+    e.stopPropagation();
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <div className='beer-container'>
@@ -46,14 +61,17 @@ export const Home = () => {
           <BeerCard
             key={`${beer.id}-${beer.name}`}
             beer={beer}
-            onClick={handleExpandCard}
+            openModal={openModal}
           />
-          <BeerCardExpanded
-            key={`${beer.id}-${beer.name}-expanded`}
-            beer={beer}
-            innerRef={expandedCardRef}
-            /* closeCard={handleCloseExpandedCard} */
-          />
+          <Modal
+            isOpen={isOpen}
+            key={`${beer.id}-${beer.name}=modal`}
+            contentLabel='Example Modal'
+            className='Modal'
+            overlayClassName='Overlay'
+          >
+            <BeerCardExpanded beer={beer} closeModal={closeModal} />
+          </Modal>
         </>
       ))}
     </div>
