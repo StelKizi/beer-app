@@ -16,7 +16,6 @@
 }
 
 .card:active {
-  transform: scale(1) translateZ(0);
   box-shadow: 0 5px 9px rgba(0, 0, 0, 0.11);
 }
 
