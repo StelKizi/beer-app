@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../styles/BeerCard.css';
 import CardActions from '@material-ui/core/CardActions';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
+import '../styles/BeerCard.css';
 
 export const BeerCard = ({ beer, handleOpen }) => {
   const [isFavorite, setIsFavorite] = useState(false);

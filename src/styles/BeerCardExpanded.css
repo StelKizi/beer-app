@@ -1,11 +1,6 @@
-/* .beer-card {
-  background-color: #fcfaf7;
+.beer-card {
   font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid #c2bdbd;
-  border-radius: 5px;
-  width: 40%;
-  margin: auto;
-} */
+}
 
 .favorite-icon {
   display: inline;
@@ -40,14 +35,15 @@ img {
   text-align: center;
 }
 
-.beer-description {
-  display: inline-block;
-  margin: 15px auto;
+.beer-expanded-description {
+  padding-top: 15px;
+  width: 90%;
+  margin: auto;
 }
 
 .food-pairing {
   font-size: 14px;
-  padding: 10px;
+  padding-top: 10px;
   width: 90%;
   margin: auto;
 }

@@ -10,7 +10,7 @@ import '../styles/Home.css';
 import { DialogContent } from '@material-ui/core';
 
 function rand() {
-  return Math.round(Math.random() * 100) - 10;
+  return Math.round(Math.random() * 20) - 10;
 }
 
 function getModalStyle() {
@@ -27,7 +27,7 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    width: 700,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -37,10 +37,10 @@ const useStyles = makeStyles(theme => ({
 export const Home = () => {
   const ref = React.createRef();
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
   const [beers, setBeers] = useState([]);
   const [open, setOpen] = useState(false);
-  const [isClicked, setIsClicked] = useState([]);
+  const [isClicked, setIsClicked] = useState({});
 
   useEffect(() => {
     const fetchBeerData = async () => {
@@ -85,11 +85,9 @@ export const Home = () => {
         onClose={handleClose}
       >
         {isClicked && (
-          <DialogContent>
+          <DialogContent style={modalStyle} className={classes.paper}>
             <BeerCardExpanded
               id={`${isClicked.id}-${isClicked.name}`}
-              className={classes.paper}
-              style={modalStyle}
               beer={isClicked}
               ref={ref}
             />

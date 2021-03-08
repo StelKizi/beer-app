@@ -34,12 +34,13 @@ export const BeerCardExpanded = React.forwardRef(({ beer }, ref) => {
             <p className='beer-tagline'>
               <i>{beer.tagline}</i>
             </p>
+            <p>First brewed: {beer.first_brewed}</p>
           </section>
         </section>
-        <p className='beer-description'>{beer.description}</p>
       </section>
 
       <section>
+        <p className='beer-expanded-description'>{beer.description}</p>
         <p className='food-pairing'>
           <i>
             Pairs best with:
