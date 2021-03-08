@@ -28,7 +28,7 @@ export const BeerCardExpanded = React.forwardRef(({ beer }, ref) => {
 
       <section className='top'>
         <section className='image-name-tagline'>
-          {<img src={beer.image_url} alt={beer.name} />}
+          <img src={beer.image_url} alt={beer.name} />
           <section className='right-side'>
             <p className='beer-name'>{beer.name}</p>
             <p className='beer-tagline'>

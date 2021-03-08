@@ -1,11 +1,11 @@
-.beer-card {
+/* .beer-card {
   background-color: #fcfaf7;
   font-family: Arial, Helvetica, sans-serif;
   border: 1px solid #c2bdbd;
   border-radius: 5px;
-  margin: 3px;
-  height: auto;
-}
+  width: 40%;
+  margin: auto;
+} */
 
 .favorite-icon {
   display: inline;
@@ -21,14 +21,6 @@
   padding-left: 40px;
 }
 
-.right-side > .beer-name {
-  margin-bottom: -12px;
-}
-
-.beer-name {
-  font-size: 22px;
-}
-
 .image-name-tagline {
   display: flex;
   margin-left: 20px;
@@ -37,10 +29,11 @@
 img {
   zoom: 15%;
 }
+
 .image-name-tagline > .beer-name {
   font-size: 22px;
-  padding-bottom: 0;
-  margin-bottom: 0;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .beer-tagline {
@@ -54,7 +47,7 @@ img {
 
 .food-pairing {
   font-size: 14px;
-  padding: 0 0 10px;
+  padding: 10px;
   width: 90%;
   margin: auto;
 }
