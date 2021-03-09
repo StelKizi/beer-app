@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
-
 import Modal from '@material-ui/core/Modal';
+import { DialogContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { PaginationButtons } from './Pagination';
 import '../styles/Home.css';
-import { DialogContent } from '@material-ui/core';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -41,12 +40,13 @@ export const Home = () => {
   const [beers, setBeers] = useState([]);
   const [open, setOpen] = useState(false);
   const [isClicked, setIsClicked] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const fetchBeerData = async () => {
+    const fetchBeerData = async pageNumber => {
       try {
         const { data } = await axios.get(
-          'https://api.punkapi.com/v2/beers?per_page=9'
+          `https://api.punkapi.com/v2/beers?page=${pageNumber}&per_page=9`
         );
         console.log(data);
         setBeers(data);
@@ -54,8 +54,12 @@ export const Home = () => {
         console.log(err);
       }
     };
-    fetchBeerData();
+    fetchBeerData(currentPage);
   }, []);
+
+  const handlePageChange = value => {
+    setCurrentPage(value);
+  };
 
   const handleOpen = id => {
     setIsClicked(beers.find(x => x.id === id));
@@ -68,32 +72,40 @@ export const Home = () => {
   };
 
   return (
-    <div className='beer-container'>
-      {beers.map(beer => (
-        <BeerCard
-          key={beer.name}
-          beer={beer}
-          id={beer.id}
-          handleOpen={handleOpen}
-        />
-      ))}
+    <>
+      <div className='beer-container'>
+        {beers.map(beer => (
+          <BeerCard
+            key={beer.name}
+            beer={beer}
+            id={beer.id}
+            handleOpen={handleOpen}
+          />
+        ))}
 
-      <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        open={open}
-        onClose={handleClose}
-      >
-        {isClicked && (
-          <DialogContent style={modalStyle} className={classes.paper}>
-            <BeerCardExpanded
-              id={`${isClicked.id}-${isClicked.name}`}
-              beer={isClicked}
-              ref={ref}
-            />
-          </DialogContent>
-        )}
-      </Modal>
-    </div>
+        <Modal
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          open={open}
+          onClose={handleClose}
+        >
+          {isClicked && (
+            <DialogContent style={modalStyle} className={classes.paper}>
+              <BeerCardExpanded
+                id={`${isClicked.id}-${isClicked.name}`}
+                beer={isClicked}
+                ref={ref}
+              />
+            </DialogContent>
+          )}
+        </Modal>
+      </div>
+      <Box component='span'>
+        <PaginationButtons
+          handlePageChange={e => handlePageChange(e.target.value)}
+          page={currentPage}
+        />
+      </Box>
+    </>
   );
 };
