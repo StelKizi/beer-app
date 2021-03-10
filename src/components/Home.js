@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
-import { DialogContent, Box } from '@material-ui/core';
+import { DialogContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { PaginationButtons } from './Pagination';
 import '../styles/Home.css';
@@ -43,22 +43,25 @@ export const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const fetchBeerData = async pageNumber => {
-      try {
-        const { data } = await axios.get(
-          `https://api.punkapi.com/v2/beers?page=${pageNumber}&per_page=9`
-        );
-        console.log(data);
-        setBeers(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchBeerData(currentPage);
-  }, []);
+  }, [currentPage]);
 
-  const handlePageChange = value => {
-    setCurrentPage(value);
+  const fetchBeerData = async pageNumber => {
+    try {
+      const { data } = await axios.get(
+        `https://api.punkapi.com/v2/beers?page=${pageNumber}&per_page=9`
+      );
+      console.log(data);
+      setBeers(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handlePageChange = e => {
+    setCurrentPage(e.target.innerText);
+    fetchBeerData(currentPage);
+    console.log('page nr:', e.target);
   };
 
   const handleOpen = id => {
@@ -100,12 +103,10 @@ export const Home = () => {
           )}
         </Modal>
       </div>
-      <Box component='span'>
-        <PaginationButtons
-          handlePageChange={e => handlePageChange(e.target.value)}
-          page={currentPage}
-        />
-      </Box>
+      <PaginationButtons
+        handlePageChange={handlePageChange}
+        page={currentPage}
+      />
     </>
   );
 };

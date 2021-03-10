@@ -17,9 +17,10 @@ export const PaginationButtons = ({ handlePageChange }) => {
     <div className={classes.root}>
       <Pagination
         count={10}
-        onChange={handlePageChange}
-        showFirstButton
-        showLastButton
+        hidePrevButton
+        hideNextButton
+        size='large'
+        onChange={e => handlePageChange(e)}
       />
     </div>
   );
