@@ -5,6 +5,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import '../styles/BeerCard.css';
 
+const favoriteButtonStyle = {
+  width: '48px',
+  height: '48px',
+};
+
 export const BeerCard = ({ beer, handleOpen }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -20,23 +25,25 @@ export const BeerCard = ({ beer, handleOpen }) => {
       </div>
 
       <div className='info-container'>
-        <section className='name-tagline'>
-          <p className='beer-name'>{beer.name}</p>
-          <p className='beer-tagline'>
-            <i>{beer.tagline}</i>
-          </p>
+        <section className='top-part'>
+          <section className='left-side'>
+            <p className='beer-name'>{beer.name}</p>
+            <p className='beer-tagline'>
+              <i>{beer.tagline}</i>
+            </p>
+          </section>
+          <CardActions style={favoriteButtonStyle}>
+            <IconButton aria-label='add to favorites'>
+              {!isFavorite ? (
+                <FavoriteBorderIcon onClickCapture={e => handleIconClick(e)} />
+              ) : (
+                <FavoriteIcon onClickCapture={e => handleIconClick(e)} />
+              )}
+            </IconButton>
+          </CardActions>
         </section>
         <p className='beer-description'>{beer.description}</p>
       </div>
-      <CardActions className='favorite-icon'>
-        <IconButton aria-label='add to favorites'>
-          {!isFavorite ? (
-            <FavoriteBorderIcon onClickCapture={e => handleIconClick(e)} />
-          ) : (
-            <FavoriteIcon onClickCapture={e => handleIconClick(e)} />
-          )}
-        </IconButton>
-      </CardActions>
     </div>
   );
 };

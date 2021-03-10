@@ -44,7 +44,7 @@ export const Home = () => {
 
   useEffect(() => {
     fetchBeerData(currentPage);
-  }, [currentPage]);
+  }, []);
 
   const fetchBeerData = async pageNumber => {
     try {
@@ -59,9 +59,9 @@ export const Home = () => {
   };
 
   const handlePageChange = e => {
-    setCurrentPage(e.target.innerText);
     fetchBeerData(currentPage);
-    console.log('page nr:', e.target);
+    setCurrentPage(e.target.innerText);
+    console.log('page nr:', e.target.innerText);
   };
 
   const handleOpen = id => {
