@@ -6,6 +6,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       marginTop: theme.spacing(2),
+      width: 400,
+      margin: '0 auto 60px',
     },
   },
 }));
