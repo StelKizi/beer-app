@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
@@ -33,35 +32,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Home = () => {
+export const Home = ({ currentPage, handlePageChange, beers }) => {
   const ref = React.createRef();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const [beers, setBeers] = useState([]);
   const [open, setOpen] = useState(false);
   const [isClicked, setIsClicked] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    fetchBeerData(currentPage);
-  }, [currentPage]);
-
-  const fetchBeerData = async pageNumber => {
-    try {
-      const { data } = await axios.get(
-        `https://api.punkapi.com/v2/beers?page=${pageNumber}&per_page=9`
-      );
-      console.log(data);
-      setBeers(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handlePageChange = e => {
-    setCurrentPage(e.target.innerText);
-    console.log('page nr:', e.target.innerText);
-  };
 
   const handleOpen = id => {
     setIsClicked(beers.find(x => x.id === id));

@@ -1,15 +1,22 @@
 import React from 'react';
-import '../styles/Search.css';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-export const Search = ({ handleUpdate, value }) => {
+export const Search = ({ beers }) => {
+  const defaultProps = {
+    options: beers,
+    getOptionLabel: option => option.name,
+  };
+
   return (
-    <form>
-      <input
-        onChange={handleUpdate}
-        placeholder='Search for a beer...'
-        value={value}
-      />
-      <span className='input-highlight'>{value.replace(/ /g, '\u00a0')}</span>
-    </form>
+    <Autocomplete
+      {...defaultProps}
+      id='clear-on-escape'
+      clearOnEscape
+      style={{ width: 400, margin: 'auto' }}
+      renderInput={params => (
+        <TextField {...params} placeholder='Search for beer...' />
+      )}
+    />
   );
 };
