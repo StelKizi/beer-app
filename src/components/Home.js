@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Home = ({ currentPage, handlePageChange, beers }) => {
-  const ref = React.createRef();
+  const ref = createRef();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
