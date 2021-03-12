@@ -42,12 +42,12 @@ export const Search = ({ beers }) => {
     getOptionLabel: option => option.name,
   };
 
-  /* const handleSubmit = e => {
-    return e.target;
-  }; */
-
-  const handleOpen = id => {
-    setIsClicked(beers.find(x => x.id === id));
+  const handleOpen = value => {
+    if (!value) {
+      return;
+    }
+    setIsClicked(beers.find(x => x.id === value.id));
+    console.log(value);
     setOpen(true);
   };
 
@@ -60,10 +60,9 @@ export const Search = ({ beers }) => {
     <>
       <Autocomplete
         {...defaultProps}
-        id='clear-on-escape'
         clearOnEscape
         style={{ width: 400, margin: 'auto' }}
-        onChange={(e, value) => handleOpen(value.id)}
+        onChange={(e, value) => handleOpen(value)}
         renderInput={params => (
           <TextField {...params} placeholder='Search for beer...' />
         )}
