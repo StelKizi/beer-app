@@ -4,7 +4,7 @@ import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
 import { DialogContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import '../styles/Favorites.css';
+import '../styles/Home.css';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 export const Favorites = ({
   currentPage,
   handlePageChange,
-  beers,
   handleSetFavorite,
   handleRemoveFavorite,
   favoriteBeers,
@@ -47,7 +46,7 @@ export const Favorites = ({
   const [isClicked, setIsClicked] = useState({});
 
   const handleOpen = id => {
-    setIsClicked(beers.find(beer => beer.id === id));
+    setIsClicked(favoriteBeers.find(beer => beer.id === id));
     setOpen(true);
   };
 
@@ -57,8 +56,8 @@ export const Favorites = ({
   };
 
   return (
-    <>
-      {beers.map(beer => (
+    <div className='beer-container'>
+      {favoriteBeers.map(beer => (
         <BeerCard
           key={beer.name}
           beer={beer}
@@ -89,6 +88,6 @@ export const Favorites = ({
           </DialogContent>
         )}
       </Modal>
-    </>
+    </div>
   );
 };

@@ -31,14 +31,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Search = ({ beers }) => {
+export const Search = ({ beers, favoriteBeers }) => {
   const [isClicked, setIsClicked] = useState({});
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
 
   const defaultProps = {
-    options: beers,
+    options: beers || favoriteBeers,
     getOptionLabel: option => option.name,
   };
 

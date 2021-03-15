@@ -57,10 +57,6 @@ export const Home = ({
     setIsClicked({});
   };
 
-  /* const isFavorite = (beer, favoriteBeers) => {
-    return favoriteBeers.includes(beer);
-  }; */
-
   return (
     <>
       <div className='beer-container'>

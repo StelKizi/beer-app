@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div>
-      <Topbar beers={beers} />
+      <Topbar beers={beers} favoriteBeers={favoriteBeers} />
       <Switch>
         <Route exact path='/'>
           <Home
@@ -64,7 +64,6 @@ function App() {
         </Route>
         <Route path='/favorites'>
           <Favorites
-            beers={beers}
             handleSetFavorite={handleSetFavorite}
             handleRemoveFavorite={handleRemoveFavorite}
             favoriteBeers={favoriteBeers}
