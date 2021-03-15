@@ -4475,7 +4475,7 @@
     "jest-message-util" "^23.4.0"
     "jest-regex-util" "^23.3.0"
 
-"express@^4.16.2", "express@^4.17.1":
+"express@^4.16.2":
   "integrity" "sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g=="
   "resolved" "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz"
   "version" "4.17.1"

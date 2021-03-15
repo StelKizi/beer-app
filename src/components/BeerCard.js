@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardActions from '@material-ui/core/CardActions';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -10,12 +10,24 @@ const favoriteButtonStyle = {
   height: '48px',
 };
 
-export const BeerCard = ({ beer, handleOpen }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const handleIconClick = e => {
+export const BeerCard = ({
+  beer,
+  handleOpen,
+  handleSetFavorite,
+  handleRemoveFavorite,
+  ...props
+}) => {
+  const handleIconClick = (e, id) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    console.log('isFavorite-modal:', props.isFavorite);
+
+    if (!props.isFavorite) {
+      //setIsFavorite(true);
+      handleSetFavorite(id);
+    } else {
+      //setIsFavorite(false);
+      handleRemoveFavorite(id);
+    }
   };
 
   return (
@@ -34,10 +46,14 @@ export const BeerCard = ({ beer, handleOpen }) => {
           </section>
           <CardActions style={favoriteButtonStyle}>
             <IconButton aria-label='add to favorites'>
-              {!isFavorite ? (
-                <FavoriteBorderIcon onClickCapture={e => handleIconClick(e)} />
+              {!props.isFavorite ? (
+                <FavoriteBorderIcon
+                  onClickCapture={e => handleIconClick(e, beer.id)}
+                />
               ) : (
-                <FavoriteIcon onClickCapture={e => handleIconClick(e)} />
+                <FavoriteIcon
+                  onClickCapture={e => handleIconClick(e, beer.id)}
+                />
               )}
             </IconButton>
           </CardActions>

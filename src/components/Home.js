@@ -32,7 +32,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Home = ({ currentPage, handlePageChange, beers }) => {
+export const Home = ({
+  currentPage,
+  handlePageChange,
+  beers,
+  handleSetFavorite,
+  handleRemoveFavorite,
+  favoriteBeers,
+  isFavorite,
+}) => {
   const ref = createRef();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
@@ -40,7 +48,7 @@ export const Home = ({ currentPage, handlePageChange, beers }) => {
   const [isClicked, setIsClicked] = useState({});
 
   const handleOpen = id => {
-    setIsClicked(beers.find(x => x.id === id));
+    setIsClicked(beers.find(beer => beer.id === id));
     setOpen(true);
   };
 
@@ -48,6 +56,10 @@ export const Home = ({ currentPage, handlePageChange, beers }) => {
     setOpen(false);
     setIsClicked({});
   };
+
+  /* const isFavorite = (beer, favoriteBeers) => {
+    return favoriteBeers.includes(beer);
+  }; */
 
   return (
     <>
@@ -58,6 +70,9 @@ export const Home = ({ currentPage, handlePageChange, beers }) => {
             beer={beer}
             id={beer.id}
             handleOpen={handleOpen}
+            handleSetFavorite={handleSetFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
+            isFavorite={isFavorite(beer, favoriteBeers)}
           />
         ))}
 
@@ -72,7 +87,10 @@ export const Home = ({ currentPage, handlePageChange, beers }) => {
               <BeerCardExpanded
                 id={`${isClicked.id}-${isClicked.name}`}
                 beer={isClicked}
+                handleSetFavorite={handleSetFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
                 ref={ref}
+                isFavorite={isFavorite(isClicked, favoriteBeers)}
               />
             </DialogContent>
           )}

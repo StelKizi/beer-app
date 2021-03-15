@@ -8,6 +8,7 @@ import axios from 'axios';
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [beers, setBeers] = useState([]);
+  const [favoriteBeers, setFavoriteBeers] = useState([]);
 
   useEffect(() => {
     const fetchBeerData = async pageNumber => {
@@ -29,6 +30,23 @@ function App() {
     console.log('page nr:', e.target.innerText);
   };
 
+  const handleSetFavorite = id => {
+    setFavoriteBeers(prevState => [
+      ...prevState,
+      beers.find(beer => beer.id === id),
+    ]);
+    console.log(favoriteBeers);
+  };
+
+  const handleRemoveFavorite = id => {
+    setFavoriteBeers(prevState => prevState.filter(beer => beer.id !== id));
+    console.log(favoriteBeers);
+  };
+
+  const isFavorite = (beer, favoriteBeers) => {
+    return favoriteBeers.includes(beer);
+  };
+
   return (
     <div>
       <Topbar beers={beers} />
@@ -38,9 +56,21 @@ function App() {
             currentPage={currentPage}
             handlePageChange={handlePageChange}
             beers={beers}
+            handleSetFavorite={handleSetFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
+            favoriteBeers={favoriteBeers}
+            isFavorite={isFavorite}
           />
         </Route>
-        <Route path='/favorites' component={Favorites} />
+        <Route path='/favorites'>
+          <Favorites
+            beers={beers}
+            handleSetFavorite={handleSetFavorite}
+            handleRemoveFavorite={handleRemoveFavorite}
+            favoriteBeers={favoriteBeers}
+            isFavorite={isFavorite}
+          />
+        </Route>
       </Switch>
     </div>
   );
