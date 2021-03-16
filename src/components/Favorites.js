@@ -58,7 +58,7 @@ export const Favorites = ({
 
   return (
     <>
-      {favoriteBeers.length !== 0 ? (
+      {favoriteBeers.length > 0 ? (
         <div className='beer-container'>
           {favoriteBeers.map(beer => (
             <BeerCard

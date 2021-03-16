@@ -59,6 +59,8 @@ function App() {
         beers={beers}
         favoriteBeers={favoriteBeers}
         isFavorite={isFavorite}
+        handleSetFavorite={handleSetFavorite}
+        handleRemoveFavorite={handleRemoveFavorite}
       />
       <Switch>
         <Route exact path='/'>
