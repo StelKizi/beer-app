@@ -31,23 +31,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Search = ({ beers, favoriteBeers }) => {
+export const Search = ({
+  beers,
+  favoriteBeers,
+  isFavorite,
+  handleSetFavorite,
+  handleRemoveFavorite,
+}) => {
   const [isClicked, setIsClicked] = useState({});
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
 
-  const defaultProps = {
-    options: beers || favoriteBeers,
-    getOptionLabel: option => option.name,
-  };
+  const options = beers.map(option => {
+    const firstLetter = option.name[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+      ...option,
+    };
+  });
 
   const handleOpen = value => {
     if (!value) {
       return;
     }
     setIsClicked(beers.find(x => x.id === value.id));
-    console.log(value);
     setOpen(true);
   };
 
@@ -59,7 +67,12 @@ export const Search = ({ beers, favoriteBeers }) => {
   return (
     <>
       <Autocomplete
-        {...defaultProps}
+        options={options.sort(
+          (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+        )}
+        groupBy={option => option.firstLetter}
+        getOptionLabel={option => option.name}
+        getOptionSelected={(option, value) => option.id === value.id}
         clearOnEscape
         style={{ width: 400, margin: 'auto' }}
         onChange={(e, value) => handleOpen(value)}
@@ -76,8 +89,10 @@ export const Search = ({ beers, favoriteBeers }) => {
         {isClicked && (
           <DialogContent style={modalStyle} className={classes.paper}>
             <BeerCardExpanded
-              id={`${isClicked.id}-${isClicked.name}`}
               beer={isClicked}
+              handleSetFavorite={handleSetFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+              isFavorite={isFavorite(isClicked, favoriteBeers)}
             />
           </DialogContent>
         )}

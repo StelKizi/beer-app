@@ -1,6 +1,6 @@
-.favorites {
+.currently-empty {
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 150px;
   margin-left: 32%;
-  /* text-align: center; */
+  color: #525050;
 }

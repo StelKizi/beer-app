@@ -18,7 +18,7 @@ export const PaginationButtons = ({ handlePageChange }) => {
   return (
     <div className={classes.root}>
       <Pagination
-        count={10}
+        count={9}
         hidePrevButton
         hideNextButton
         size='large'

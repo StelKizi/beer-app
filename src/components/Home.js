@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState } from 'react';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
@@ -41,7 +41,6 @@ export const Home = ({
   favoriteBeers,
   isFavorite,
 }) => {
-  const ref = createRef();
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -81,11 +80,9 @@ export const Home = ({
           {isClicked && (
             <DialogContent style={modalStyle} className={classes.paper}>
               <BeerCardExpanded
-                id={`${isClicked.id}-${isClicked.name}`}
                 beer={isClicked}
                 handleSetFavorite={handleSetFavorite}
                 handleRemoveFavorite={handleRemoveFavorite}
-                ref={ref}
                 isFavorite={isFavorite(isClicked, favoriteBeers)}
               />
             </DialogContent>

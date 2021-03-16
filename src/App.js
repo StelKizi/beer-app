@@ -9,12 +9,13 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [beers, setBeers] = useState([]);
   const [favoriteBeers, setFavoriteBeers] = useState([]);
+  const [beersPerPage] = useState(9);
 
   useEffect(() => {
-    const fetchBeerData = async pageNumber => {
+    const fetchBeerData = async () => {
       try {
         const { data } = await axios.get(
-          `https://api.punkapi.com/v2/beers?page=${pageNumber}&per_page=15`
+          `https://api.punkapi.com/v2/beers/?per_page=80`
         );
         console.log(data);
         setBeers(data);
@@ -22,8 +23,8 @@ function App() {
         console.log(err);
       }
     };
-    fetchBeerData(currentPage);
-  }, [currentPage]);
+    fetchBeerData();
+  }, []);
 
   const handlePageChange = e => {
     setCurrentPage(e.target.innerText);
@@ -47,15 +48,24 @@ function App() {
     return favoriteBeers.includes(beer);
   };
 
+  /* Get current beers */
+  const indexOfLastBeer = currentPage * beersPerPage;
+  const indexOfFirstBeer = indexOfLastBeer - beersPerPage;
+  const currentBeers = beers.slice(indexOfFirstBeer, indexOfLastBeer);
+
   return (
     <div>
-      <Topbar beers={beers} favoriteBeers={favoriteBeers} />
+      <Topbar
+        beers={beers}
+        favoriteBeers={favoriteBeers}
+        isFavorite={isFavorite}
+      />
       <Switch>
         <Route exact path='/'>
           <Home
             currentPage={currentPage}
             handlePageChange={handlePageChange}
-            beers={beers}
+            beers={currentBeers}
             handleSetFavorite={handleSetFavorite}
             handleRemoveFavorite={handleRemoveFavorite}
             favoriteBeers={favoriteBeers}

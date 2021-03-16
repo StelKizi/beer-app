@@ -4,10 +4,22 @@ import { Nav } from './Nav';
 
 import '../styles/Topbar.css';
 
-export const Topbar = ({ beers, favoriteBeers }) => {
+export const Topbar = ({
+  beers,
+  favoriteBeers,
+  isFavorite,
+  handleSetFavorite,
+  handleRemoveFavorite,
+}) => {
   return (
     <div className='topbar'>
-      <Search beers={beers} favoriteBeers={favoriteBeers} />
+      <Search
+        beers={beers}
+        favoriteBeers={favoriteBeers}
+        isFavorite={isFavorite}
+        handleSetFavorite={handleSetFavorite}
+        handleRemoveFavorite={handleRemoveFavorite}
+      />
       <Nav />
     </div>
   );

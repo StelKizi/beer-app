@@ -4,6 +4,7 @@ import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
 import { DialogContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import '../styles/Favorites.css';
 import '../styles/Home.css';
 
 function rand() {
@@ -56,38 +57,46 @@ export const Favorites = ({
   };
 
   return (
-    <div className='beer-container'>
-      {favoriteBeers.map(beer => (
-        <BeerCard
-          key={beer.name}
-          beer={beer}
-          id={beer.id}
-          handleOpen={handleOpen}
-          handleSetFavorite={handleSetFavorite}
-          handleRemoveFavorite={handleRemoveFavorite}
-          isFavorite={isFavorite(beer, favoriteBeers)}
-        />
-      ))}
-
-      <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        open={open}
-        onClose={handleClose}
-      >
-        {isClicked && (
-          <DialogContent style={modalStyle} className={classes.paper}>
-            <BeerCardExpanded
-              id={`${isClicked.id}-${isClicked.name}`}
-              beer={isClicked}
+    <>
+      {favoriteBeers.length !== 0 ? (
+        <div className='beer-container'>
+          {favoriteBeers.map(beer => (
+            <BeerCard
+              key={beer.name}
+              beer={beer}
+              id={beer.id}
+              handleOpen={handleOpen}
               handleSetFavorite={handleSetFavorite}
               handleRemoveFavorite={handleRemoveFavorite}
-              ref={ref}
-              isFavorite={isFavorite(isClicked, favoriteBeers)}
+              isFavorite={isFavorite(beer, favoriteBeers)}
             />
-          </DialogContent>
-        )}
-      </Modal>
-    </div>
+          ))}
+
+          <Modal
+            aria-labelledby='transition-modal-title'
+            aria-describedby='transition-modal-description'
+            open={open}
+            onClose={handleClose}
+          >
+            {isClicked && (
+              <DialogContent style={modalStyle} className={classes.paper}>
+                <BeerCardExpanded
+                  id={`${isClicked.id}-${isClicked.name}`}
+                  beer={isClicked}
+                  handleSetFavorite={handleSetFavorite}
+                  handleRemoveFavorite={handleRemoveFavorite}
+                  ref={ref}
+                  isFavorite={isFavorite(isClicked, favoriteBeers)}
+                />
+              </DialogContent>
+            )}
+          </Modal>
+        </div>
+      ) : (
+        <div className='currently-empty'>
+          <h1>No beers are currently selected.</h1>
+        </div>
+      )}
+    </>
   );
 };
