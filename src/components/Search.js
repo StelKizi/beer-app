@@ -43,7 +43,13 @@ export const Search = ({
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
 
-  const options = beers.map(option => {
+  let options;
+  document.location.pathname === '/favorites'
+    ? (options = favoriteBeers)
+    : (options = beers);
+  console.log('options', options);
+
+  options = options.map(option => {
     const firstLetter = option.name[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
@@ -77,7 +83,7 @@ export const Search = ({
         style={{ width: 400, margin: 'auto' }}
         onChange={(e, value) => handleOpen(value)}
         renderInput={params => (
-          <TextField {...params} placeholder='Search for beer...' />
+          <TextField {...params} placeholder='Search beers...' />
         )}
       />
       <Modal

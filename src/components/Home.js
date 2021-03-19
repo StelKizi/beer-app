@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Topbar } from './Topbar';
 import { BeerCardExpanded } from './BeerCardExpanded';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
@@ -58,6 +59,13 @@ export const Home = ({
 
   return (
     <>
+      <Topbar
+        beers={beers}
+        favoriteBeers={favoriteBeers}
+        isFavorite={isFavorite}
+        handleSetFavorite={handleSetFavorite}
+        handleRemoveFavorite={handleRemoveFavorite}
+      />
       <div className='beer-container'>
         {beers.map(beer => (
           <BeerCard

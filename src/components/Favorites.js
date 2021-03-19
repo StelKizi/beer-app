@@ -1,5 +1,6 @@
 import React, { useState, createRef } from 'react';
 import { BeerCardExpanded } from './BeerCardExpanded';
+import { Topbar } from './Topbar';
 import { BeerCard } from './BeerCard';
 import Modal from '@material-ui/core/Modal';
 import { DialogContent } from '@material-ui/core';
@@ -39,6 +40,7 @@ export const Favorites = ({
   handleRemoveFavorite,
   favoriteBeers,
   isFavorite,
+  beers,
 }) => {
   const ref = createRef();
   const classes = useStyles();
@@ -58,6 +60,13 @@ export const Favorites = ({
 
   return (
     <>
+      <Topbar
+        beers={beers}
+        favoriteBeers={favoriteBeers}
+        isFavorite={isFavorite}
+        handleSetFavorite={handleSetFavorite}
+        handleRemoveFavorite={handleRemoveFavorite}
+      />
       {favoriteBeers.length > 0 ? (
         <div className='beer-container'>
           {favoriteBeers.map(beer => (
@@ -94,7 +103,9 @@ export const Favorites = ({
         </div>
       ) : (
         <div className='currently-empty'>
-          <h1>No beers are currently selected.</h1>
+          <h1>
+            <i>No beers are currently selected.</i>
+          </h1>
         </div>
       )}
     </>

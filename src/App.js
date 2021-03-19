@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Switch, Route } from 'react-router-dom';
-import { Topbar } from './components/Topbar';
 import { Home } from './components/Home';
 import { Favorites } from './components/Favorites';
+import Login from './components/Login';
 import axios from 'axios';
+import LoadingIcon from './components/LoadingIcon';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [beers, setBeers] = useState([]);
   const [favoriteBeers, setFavoriteBeers] = useState([]);
   const [beersPerPage] = useState(9);
+  const { isLoading, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     const fetchBeerData = async () => {
@@ -48,41 +51,40 @@ function App() {
     return favoriteBeers.includes(beer);
   };
 
-  /* Get current beers */
+  // Get current beers
   const indexOfLastBeer = currentPage * beersPerPage;
   const indexOfFirstBeer = indexOfLastBeer - beersPerPage;
   const currentBeers = beers.slice(indexOfFirstBeer, indexOfLastBeer);
 
+  if (isLoading) return <LoadingIcon />;
   return (
     <div>
-      <Topbar
-        beers={beers}
-        favoriteBeers={favoriteBeers}
-        isFavorite={isFavorite}
-        handleSetFavorite={handleSetFavorite}
-        handleRemoveFavorite={handleRemoveFavorite}
-      />
-      <Switch>
-        <Route exact path='/'>
-          <Home
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-            beers={currentBeers}
-            handleSetFavorite={handleSetFavorite}
-            handleRemoveFavorite={handleRemoveFavorite}
-            favoriteBeers={favoriteBeers}
-            isFavorite={isFavorite}
-          />
-        </Route>
-        <Route path='/favorites'>
-          <Favorites
-            handleSetFavorite={handleSetFavorite}
-            handleRemoveFavorite={handleRemoveFavorite}
-            favoriteBeers={favoriteBeers}
-            isFavorite={isFavorite}
-          />
-        </Route>
-      </Switch>
+      <Login />
+      {isAuthenticated && (
+        <>
+          <Switch>
+            <Route exact path='/'>
+              <Home
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+                beers={currentBeers}
+                handleSetFavorite={handleSetFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
+                favoriteBeers={favoriteBeers}
+                isFavorite={isFavorite}
+              />
+            </Route>
+            <Route path='/favorites'>
+              <Favorites
+                handleSetFavorite={handleSetFavorite}
+                handleRemoveFavorite={handleRemoveFavorite}
+                favoriteBeers={favoriteBeers}
+                isFavorite={isFavorite}
+              />
+            </Route>
+          </Switch>
+        </>
+      )}
     </div>
   );
 }
