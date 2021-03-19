@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
 import { Switch, Route } from 'react-router-dom';
 import { Home } from './components/Home';
 import { Favorites } from './components/Favorites';
-import Login from './components/Login';
 import axios from 'axios';
-import LoadingIcon from './components/LoadingIcon';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [beers, setBeers] = useState([]);
   const [favoriteBeers, setFavoriteBeers] = useState([]);
   const [beersPerPage] = useState(9);
-  const { isLoading, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     const fetchBeerData = async () => {
@@ -20,7 +16,6 @@ function App() {
         const { data } = await axios.get(
           `https://api.punkapi.com/v2/beers/?per_page=80`
         );
-        console.log(data);
         setBeers(data);
       } catch (err) {
         console.log(err);
@@ -34,6 +29,21 @@ function App() {
     console.log('page nr:', e.target.innerText);
   };
 
+  useEffect(() => {
+    const data = localStorage.getItem('my-beer-list');
+    try {
+      if (data) {
+        setFavoriteBeers(JSON.parse(data));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('my-beer-list', JSON.stringify(favoriteBeers));
+  });
+
   const handleSetFavorite = id => {
     setFavoriteBeers(prevState => [
       ...prevState,
@@ -44,6 +54,7 @@ function App() {
 
   const handleRemoveFavorite = id => {
     setFavoriteBeers(prevState => prevState.filter(beer => beer.id !== id));
+    localStorage.removeItem('my-beer-list', JSON.stringify(favoriteBeers));
     console.log(favoriteBeers);
   };
 
@@ -56,35 +67,31 @@ function App() {
   const indexOfFirstBeer = indexOfLastBeer - beersPerPage;
   const currentBeers = beers.slice(indexOfFirstBeer, indexOfLastBeer);
 
-  if (isLoading) return <LoadingIcon />;
   return (
     <div>
-      <Login />
-      {isAuthenticated && (
-        <>
-          <Switch>
-            <Route exact path='/'>
-              <Home
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-                beers={currentBeers}
-                handleSetFavorite={handleSetFavorite}
-                handleRemoveFavorite={handleRemoveFavorite}
-                favoriteBeers={favoriteBeers}
-                isFavorite={isFavorite}
-              />
-            </Route>
-            <Route path='/favorites'>
-              <Favorites
-                handleSetFavorite={handleSetFavorite}
-                handleRemoveFavorite={handleRemoveFavorite}
-                favoriteBeers={favoriteBeers}
-                isFavorite={isFavorite}
-              />
-            </Route>
-          </Switch>
-        </>
-      )}
+      <>
+        <Switch>
+          <Route exact path='/'>
+            <Home
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              beers={currentBeers}
+              handleSetFavorite={handleSetFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+              favoriteBeers={favoriteBeers}
+              isFavorite={isFavorite}
+            />
+          </Route>
+          <Route path='/favorites'>
+            <Favorites
+              handleSetFavorite={handleSetFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+              favoriteBeers={favoriteBeers}
+              isFavorite={isFavorite}
+            />
+          </Route>
+        </Switch>
+      </>
     </div>
   );
 }

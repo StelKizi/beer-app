@@ -47,7 +47,6 @@ export const Search = ({
   document.location.pathname === '/favorites'
     ? (options = favoriteBeers)
     : (options = beers);
-  console.log('options', options);
 
   options = options.map(option => {
     const firstLetter = option.name[0].toUpperCase();
