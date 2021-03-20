@@ -1,6 +1,6 @@
-## You can preview the app [here](https://the-beer-app.netlify.app/).
+## You can check the app [here](https://the-beer-app.netlify.app/).
 
-This project was created using `React.js` and `Material-ui` and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created using [Punk API](https://punkapi.com/), `React.js` and `Material-ui` and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To test locally:
 
