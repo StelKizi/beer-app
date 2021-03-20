@@ -12,13 +12,10 @@ export const BeerCardExpanded = /* React.forwardRef */ (
 ) => {
   const handleIconClick = (e, id) => {
     e.stopPropagation();
-    console.log('isFavorite-modal:', props.isFavorite);
 
     if (!props.isFavorite) {
-      //setIsFavorite(true);
       handleSetFavorite(id);
     } else {
-      //setIsFavorite(false);
       handleRemoveFavorite(id);
     }
   };

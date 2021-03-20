@@ -26,7 +26,6 @@ function App() {
 
   const handlePageChange = e => {
     setCurrentPage(e.target.innerText);
-    console.log('page nr:', e.target.innerText);
   };
 
   useEffect(() => {
@@ -49,17 +48,15 @@ function App() {
       ...prevState,
       beers.find(beer => beer.id === id),
     ]);
-    console.log(favoriteBeers);
   };
 
   const handleRemoveFavorite = id => {
     setFavoriteBeers(prevState => prevState.filter(beer => beer.id !== id));
     localStorage.removeItem('my-beer-list', JSON.stringify(favoriteBeers));
-    console.log(favoriteBeers);
   };
 
   const isFavorite = (beer, favoriteBeers) => {
-    return favoriteBeers.includes(beer);
+    return favoriteBeers.some(fav => fav.id === beer.id);
   };
 
   // Get current beers
