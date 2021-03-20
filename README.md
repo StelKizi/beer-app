@@ -1,7 +1,6 @@
 ## You can preview the app [here](https://the-beer-app.netlify.app/).
 
-### The project was created using `React.js` and `Material-ui`.  
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created using `React.js` and `Material-ui` and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To test locally:
 
